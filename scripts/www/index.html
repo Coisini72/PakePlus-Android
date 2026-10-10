@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>江苏吃饭大学饮食搭配助手</title>
+    <style>
+        *{box-sizing: border-box;margin:0;padding:0;font-family:system-ui}
+        body{background:#f6f8fa;padding:20px;color:#333}
+        .container{max-width:600px;margin:0 auto;background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px #00000010}
+        h1{text-align:center;font-size:22px;margin-bottom:20px;color:#2b7a78}
+        .meal-card{padding:16px;border:1px solid #e8e8e8;border-radius:12px;margin-bottom:12px}
+        .meal-title{font-weight:bold;font-size:17px;margin-bottom:8px;color:#3aafa9}
+        .tip{background:#f0f9f7;padding:12px;border-radius:10px;margin-top:16px;font-size:14px;color:#2b7a78}
+        .warn{background:#fff3f3;padding:12px;border-radius:10px;margin-top:10px;font-size:14px;color:#c83e3e}
+        button{width:100%;padding:14px;border:none;background:#2b7a78;color:#fff;border-radius:10px;font-size:16px;margin-top:16px;cursor:pointer}
+        button:active{background:#1f5c5a}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍽️江苏吃饭大学饮食搭配助手</h1>
+        <div id="mealBox">
+            <!-- 饮食内容自动渲染 -->
+        </div>
+        <div class="tip">
+            💡饮食提示：配合盐酸氨基葡萄糖服用，优先优质蛋白+维C；吃药可随餐搭配温牛奶保护胃部。
+            ✅独立随机：早餐/午餐/晚餐/加餐分开随机组合
+        </div>
+        <div class="warn">
+            ⚠️忌口：不吃豆制品、茄子、葱；除鸭血/猪血/猪肝外不吃内脏；胃反酸请少油少辣，不要吃到撑。
+        </div>
+        <button onclick="randomAll()">重新随机搭配</button>
+    </div>
+
+    <script>
+        // 【四个独立菜品池，可以自己在这里增删菜品，只改引号内文字！】
+        const breakfastList = [
+            "水煮蛋 + 鲜牛奶",
+            "水煮蛋 + 南瓜糊",
+            "灌汤包+燕麦奶",
+            "鸡蛋饼（一食堂）+南瓜糊",
+            "水煮蛋+海河牛奶",
+            "灌汤包 + 维维豆奶巧克力味"
+        ];
+
+        const lunchList = [
+            "辣椒炒肉 + 水煮小青菜 + 米饭（玉泉河）",
+            "番茄鸡蛋面（步行街）",
+            "猪排咖喱饭（唐三酱）",
+            "儿童餐（六食堂）",
+            "叉烧饭（玉泉河）",
+            "鸡排咖喱饭（唐三酱）",
+            "瘦肉炒菜  + 米饭（玉泉河）",
+            "铁板饭（唐三酱）"
+        ];
+
+        const dinnerList = [
+            "小馄饨一碗",
+            "鸭血粉丝（一食堂旁边）",
+            "瓦罐瘦肉汤 + 米饭（三食堂）",
+            "渔粉（六食堂）",
+            "拌面（一食堂）",
+            "拌面（步行街）",
+            "燃面（三食堂）",
+            "小馄饨，搭配一份切块水果"
+        ];
+
+        const snackList = [
+            "苹果",
+            "水煮玉米半根",
+            "小番茄",
+            "南瓜糊一小碗",
+            "梨",
+            "橘子",
+            "橙子",
+            "香蕉",
+            "柿子",
+            "猕猴桃",
+            "梨汤",
+            "板栗饼"
+        ];
+
+        // 从数组随机抽取一项
+        function pickRandom(arr){
+            const index = Math.floor(Math.random() * arr.length);
+            return arr[index];
+        }
+
+        function randomAll(){
+            const breakfast = pickRandom(breakfastList);
+            const lunch = pickRandom(lunchList);
+            const dinner = pickRandom(dinnerList);
+            const snack = pickRandom(snackList);
+
+            const html = `
+                <div class="meal-card">
+                    <div class="meal-title">🌞早餐</div>
+                    <div>${breakfast}</div>
+                </div>
+                <div class="meal-card">
+                    <div class="meal-title">☀️午餐</div>
+                    <div>${lunch}</div>
+                </div>
+                <div class="meal-card">
+                    <div class="meal-title">🌙晚餐</div>
+                    <div>${dinner}</div>
+                </div>
+                <div class="meal-card">
+                    <div class="meal-title">🍎加餐</div>
+                    <div>${snack}</div>
+                </div>
+            `;
+            document.getElementById("mealBox").innerHTML = html;
+        }
+        // 页面打开自动随机加载一套
+        randomAll();
+    </script>
+</body>
+</html>
